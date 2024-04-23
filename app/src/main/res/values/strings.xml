@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">FunnyJokes</string>
-    <string name="punch">Punch!</string>
+    <string name="load_joke">Load joke!</string>
     <string name="arrow_next_joke">arrow next joke</string>
     <string name="add_to_favorites">add to favorites</string>
     <string name="add_to_or_remove_from_favorites">add to or remove from favorites</string>
+    <string name="tap_to_see_punch">tap on the setup text to see the punch:)</string>
 </resources>
