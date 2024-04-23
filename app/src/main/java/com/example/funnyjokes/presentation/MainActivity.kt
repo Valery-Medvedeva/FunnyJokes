@@ -34,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding.buttonLoadJoke.setOnClickListener {
             viewModel.loadJoke()
         }
-        binding.textViewJoke.setOnClickListener {
-            viewModel.showPunch()
-        }
     }
     private fun observe() {
         viewModel.state.observe(this) {

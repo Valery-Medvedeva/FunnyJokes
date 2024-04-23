@@ -23,8 +23,4 @@ class JokeViewModel @Inject constructor(
             _state.value = JokeState.Info(joke)
         }
     }
-
-    fun showPunch(joke: Joke){
-        _state.value=JokeState.Info(joke)
-    }
 }
