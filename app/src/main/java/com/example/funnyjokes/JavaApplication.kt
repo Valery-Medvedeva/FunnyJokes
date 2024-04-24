@@ -3,9 +3,9 @@ package com.example.funnyjokes
 import android.app.Application
 import com.example.funnyjokes.di.DaggerAppComponent
 
-class JavaApplication: Application() {
+class JavaApplication : Application() {
 
     val component by lazy {
-        DaggerAppComponent.create()
+        DaggerAppComponent.factory().create(this)
     }
 }

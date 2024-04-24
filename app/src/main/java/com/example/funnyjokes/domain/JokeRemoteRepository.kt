@@ -1,5 +1,5 @@
 package com.example.funnyjokes.domain
 
-interface JokeRepository {
+interface JokeRemoteRepository {
     suspend fun getJoke(): Joke
 }

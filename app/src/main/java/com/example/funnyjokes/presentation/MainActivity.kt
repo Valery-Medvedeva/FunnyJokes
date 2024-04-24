@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var joke: Joke
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        component?.inject(this)
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         observe()
