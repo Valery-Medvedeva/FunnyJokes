@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[JokeViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
     private lateinit var joke: Joke
@@ -35,14 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         observe()
-        binding.buttonLoadJoke.setOnClickListener {
-            viewModel.loadJoke()
-        }
-        binding.textViewJoke.setOnClickListener {
-            if (!binding.textViewJoke.text.isNullOrBlank()) {
-                binding.textViewJoke.text = joke.toString()
-            }
-        }
+        setOnClickListeners()
     }
 
     private fun observe() {
@@ -68,6 +61,24 @@ class MainActivity : AppCompatActivity() {
                     binding.textViewJoke.text = it.joke.setup
                 }
             }
+        }
+    }
+
+    fun setOnClickListeners(){
+        binding.buttonLoadJoke.setOnClickListener {
+            viewModel.loadJoke()
+        }
+        binding.textViewJoke.setOnClickListener {
+            if (!binding.textViewJoke.text.isNullOrBlank()) {
+                binding.textViewJoke.text = joke.toString()
+            }
+        }
+        binding.buttonFavorite.setOnClickListener {
+            val intent=FavoriteActivity.newIntent(this)
+            startActivity(intent)
+        }
+        binding.imageViewHeartEmpty.setOnClickListener {
+            viewModel.addJokeToDb(joke)
         }
     }
 }

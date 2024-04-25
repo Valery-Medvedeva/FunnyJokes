@@ -4,7 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.funnyjokes.domain.AddJokeToDbUseCase
+import com.example.funnyjokes.domain.DeleteJokeFromDbUseCase
 import com.example.funnyjokes.domain.GetJokeUseCase
 import com.example.funnyjokes.domain.Joke
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,8 +15,10 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class JokeViewModel @Inject constructor(
-    private val getJokeUseCase: GetJokeUseCase
+class MainViewModel @Inject constructor(
+    private val getJokeUseCase: GetJokeUseCase,
+    private val addJokeToDbUseCase: AddJokeToDbUseCase,
+    private val deleteJokeFromDbUseCase: DeleteJokeFromDbUseCase
 ) : ViewModel() {
 
     private val exceptionHandler= CoroutineExceptionHandler {
@@ -34,6 +37,17 @@ class JokeViewModel @Inject constructor(
         coroutineScope.launch {
             val joke = getJokeUseCase.invoke()
             _state.value = JokeState.Info(joke)
+        }
+    }
+    fun addJokeToDb(joke: Joke){
+        coroutineScope.launch {
+            addJokeToDbUseCase.invoke(joke)
+        }
+    }
+
+    fun deleteJokeToDb(joke: Joke){
+        coroutineScope.launch {
+            deleteJokeFromDbUseCase.invoke(joke)
         }
     }
 

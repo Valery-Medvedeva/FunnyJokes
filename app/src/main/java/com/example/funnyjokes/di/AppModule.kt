@@ -5,8 +5,11 @@ import androidx.room.Room
 import com.example.funnyjokes.Const
 import com.example.funnyjokes.data.database.JokeDao
 import com.example.funnyjokes.data.database.JokeDatabase
+import com.example.funnyjokes.data.database.JokeLocalRepositoryImpl
+import com.example.funnyjokes.data.database.JokeMapper
 import com.example.funnyjokes.data.network.ApiService
 import com.example.funnyjokes.data.network.JokeRemoteRepositoryImpl
+import com.example.funnyjokes.domain.JokeLocalRepository
 import com.example.funnyjokes.domain.JokeRemoteRepository
 import dagger.Module
 import dagger.Provides
@@ -36,8 +39,13 @@ class AppModule {
     }
 
     @Provides
-    fun provideJokeRepository(api: ApiService): JokeRemoteRepository {
+    fun provideJokeRemoteRepository(api: ApiService): JokeRemoteRepository {
         return JokeRemoteRepositoryImpl(api)
+    }
+
+    @Provides
+    fun provideJokeLocalRepository(mapper: JokeMapper, dao: JokeDao):JokeLocalRepository{
+        return JokeLocalRepositoryImpl(mapper, dao)
     }
 
     @AppScope
